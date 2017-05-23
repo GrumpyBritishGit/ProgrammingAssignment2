@@ -9,8 +9,9 @@
 makeCacheMatrix <- function(x = matrix()) {
   if(!is.matrix(x)) stop("Please pass the function a matrix")
   i <- NULL
-  set <- function(x,...) {
-    x <<- matrix(x,...)
+  set <- function(y) {
+    if(!is.matrix(y)) stop("Please pass the function a matrix")
+    x <<- y
     i <<- NULL
   }
   get <- function() x
