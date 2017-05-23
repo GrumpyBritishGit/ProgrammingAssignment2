@@ -4,14 +4,18 @@
 # facilitate the caching of the inverse of the matrix in addition to the original state, thereby removing the need 
 # for recalculation.
 
-# additional error handling has been added.
+# if not sent a matrix the function will take the input and convert it to a matrix. This allows the user to pass the function
+# a matrix declaration.
 
-makeCacheMatrix <- function(x = matrix()) {
-  if(!is.matrix(x)) stop("Please pass the function a matrix")
+makeCacheMatrix <- function(x = matrix(),...) {
+  if(!is.matrix(x)) x <- matrix(x,...)
   i <- NULL
-  set <- function(y) {
-    if(!is.matrix(y)) stop("Please pass the function a matrix")
-    x <<- y
+  set <- function(y,...) {
+    if(!is.matrix(y)){
+      x <<- matrix(y,...)
+    } else {
+      x <<- y
+    }
     i <<- NULL
   }
   get <- function() x
